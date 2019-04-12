@@ -1,4 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-Sign up Here
+<div class="container" align="center">
+<h1>Sign up Here</h1>
+<br>
+<br>
+<form metohd="POST" action=""{% url 'Signup' %}">
+{% csrf_token %}
+Username:
+<br>
+<input type="text" name="Username" />
+<br>
+Email:
+<br>
+<input type="email" name="Email" />
+<br>
+Password:
+<br>
+<input type="password" name="Pass" />
+<br>
+Confirm Password:
+<br>
+<input type="password" name="ConfPass" />
+<br>
+<br>
+<button type="button" class="btn btn-primary">Sign Up</button>
+
+</form>
+</div>
+
 {% endblock %}
