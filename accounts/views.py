@@ -25,10 +25,12 @@ def Login(request):
             auth.login(request,user)
             return redirect('home')
         else:
-            return render(request,'accounts/Login.html',{'error': 'Invalid Username or Password!'})        
+            return render(request,'accounts/Login.html',{'error': 'Invalid Username or Password!'})
     else:
         return render(request,'accounts/Login.html')
 
 
-#def Logout(request):
-#        return render(request,'accounts/Signup.html')
+def Logout(request):
+    if request.method == 'POST':
+        auth.logout(request)
+        return redirect('home')
