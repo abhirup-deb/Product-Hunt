@@ -1,10 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
+<br>
+{% if error %}
+{{error}}
+<br>
+<br>
+{% endif %}
 <div class="container" align="center">
 <h1>Sign up Here</h1>
 <br>
 <br>
-<form metohd="POST" action=""{% url 'Signup' %}">
+<form action="{% url 'Signup' %}" metohd="post" >
 {% csrf_token %}
 Username:
 <br>
@@ -23,8 +29,7 @@ Confirm Password:
 <input type="password" name="ConfPass" />
 <br>
 <br>
-<button type="button" class="btn btn-primary">Sign Up</button>
-
+<input type="submit" class="btn btn-primary" value="Sign Up" />
 </form>
 </div>
 
