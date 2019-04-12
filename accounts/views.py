@@ -16,10 +16,19 @@ def Signup(request):
             return render(request, 'accounts/Signup.html', {'error': 'Passwords must match!'})
     else:
         return render(request,'accounts/Signup.html')
-    
+
 
 def Login(request):
-    return render(request,'accounts/Login.html')
+    if request.method == 'POST':
+        user= auth.authenticate(Username=request.POST['Username'],Password=request.POST['Pass'])
+        if user is not None:
+            auth.login(request,user)
+            return redirect('home')
+        else:
+            return render(request,'accounts/Login.html',{'error': 'Invalid Username or Password!'})        
+    else:
+        return render(request,'accounts/Login.html')
+
 
 #def Logout(request):
 #        return render(request,'accounts/Signup.html')
