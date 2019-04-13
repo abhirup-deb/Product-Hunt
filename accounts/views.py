@@ -22,7 +22,7 @@ def Login(request):
     if request.method == 'POST':
         user= auth.authenticate(Username=request.POST['Username'],Password=request.POST['Pass'])
         if user is not None:
-            auth.login(request,user)
+            auth.Login(request,user)
             return redirect('home')
         else:
             return render(request,'accounts/Login.html',{'error': 'Invalid Username or Password!'})
@@ -32,5 +32,5 @@ def Login(request):
 
 def Logout(request):
     if request.method == 'POST':
-        auth.logout(request)
+        auth.Logout(request)
         return redirect('home')
