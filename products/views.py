@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from django.utils import timezone
@@ -13,7 +13,7 @@ def Create(request):
             product = Product()
             product.title = request.POST['title']
             product.body = request.POST['body']
-            if request.POST['url'].startswith('http://') or request.POST['url'].startswith('https://')
+            if request.POST['url'].startswith('http://') or request.POST['url'].startswith('https://'):
                 product.url = request.POST['url']
             else:
                 product.url = 'http://' + request.POST['url']
@@ -27,3 +27,13 @@ def Create(request):
             return render(request,'producys/templates/Create.html',{'error':'Some Fields were kept empty'})
     else:
         return render(request,'producys/templates/Create.html')
+
+def Detail(request,product_id):
+    product= get_object_or_404(Product,pk=product_id)
+    return render(request, 'products/templates/Detail.html',{'product':product})
+
+def upvote(request,product_id):
+    product= get_object_or_404(Product,pk=product_id)
+    product.votes_total += 1
+    product.save()
+    return redirect('/products/' + str(product_id))
